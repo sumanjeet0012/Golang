@@ -1,5 +1,7 @@
 package main
 
+import "log"
+
 type Course struct {
 	CourserId   string  `json:"courseid"`
 	CourseName  string  `json:"coursename"`
@@ -12,6 +14,19 @@ type Author struct {
 	AutherEmail string
 }
 
-func main() {
+var courses []Course
 
+func IsEmpty(c *Course) bool {
+	return c.CourseName == ""
+}
+
+func main() {
+	IsEmpty(&courses)
+	console.log('');
+	fmt.Println('hey')
+	
+	
+	
+	
+	
 }
