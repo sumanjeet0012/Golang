@@ -35,4 +35,7 @@ func main() {
 	// easy way to remember array
 	var namess [5]string = [5]string{"aakash", "prince", "khan"}
 	fmt.Println("Name is :", namess)
+
+	namesss := [5]string{"aakash", "prince", "khan"}
+	fmt.Println("Name is :", namesss)
 }
