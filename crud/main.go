@@ -3,7 +3,9 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
+	"strings"
 )
 
 type Todo struct {
@@ -48,5 +50,51 @@ func main() {
 		return
 	}
 	fmt.Println(todo)
+
+	// POST request
+
+	todo1 := Todo{
+		UserId:    1,
+		Title:     "Buy milk",
+		Completed: false,
+	}
+
+	// Convert struct to JSON
+
+	jsonData1, err2 := json.Marshal(todo1)
+	if err != nil {
+		fmt.Println("error while marshalling", err2)
+		return
+	}
+	fmt.Println(jsonData1)
+	fmt.Println(string(jsonData1))
+
+	// Convert JSON to string
+
+	jsonString := string(jsonData1)
+	fmt.Println(jsonString)
+
+	// Convert string data to reader
+	jsonReader := strings.NewReader(jsonString)
+	fmt.Println(jsonReader)
+	fmt.Println(*jsonReader)
+
+	myUrl := "https://jsonplaceholder.typicode.com/todos"
+
+	// Send POST request
+
+	res3, err3 := http.Post(myUrl, "application/json", jsonReader)
+
+	if err3 != nil {
+		fmt.Println("error while using post request", err3)
+		return
+	}
+
+	defer res3.Body.Close()
+
+	data, _ := ioutil.ReadAll(res3.Body)
+
+	fmt.Println("Status is", res3.Status)
+	fmt.Println("Response is", string(data))
 
 }
